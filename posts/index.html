@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.74a88dfddadfbb158775e8d0fe1ccb18ed25e9089d70b69538180e7fadd7f646.js" integrity="sha256-dKiN/drfuxWHdejQ/hzLGO0l6QidcLaVOBgOf63X9kY=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.ee97a19f27450f80c5a8e75bbfe836ba2743923ae51face6321da3a67d02bc4a.js" integrity="sha256-7pehnydFD4DFqOdbv&#43;g2uidDkjrlH6zmMh2jpn0CvEo=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://hyylc.github.io/posts/index.xml" title="Hyy小站" />
 <!--
 Made with Book Theme
@@ -186,6 +186,24 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/blog/day27_2023.6.15/" class="">Day27 2023.6.15</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
     
   </ul>
 
@@ -514,6 +532,28 @@ https://github.com/alex-shpak/hugo-book
     <p>Introduction#This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&rsquo;t cover using CSS to style your theme.
 We&rsquo;ll start with creating a new site with a very basic template.
         <a href="/posts/creating-a-new-theme/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/posts/2023.6.15/">Migrating from Jekyll</a>
+    </h2>
+    
+  <h5>March 10, 2014</h5>
+
+
+
+  
+
+  
+
+
+
+
+    <p>手写自动柯里化函数#function myCurrying(fn) { // args接收剩余参数 return function curryFn(...args) { // 判断当前参数数量是否大于等于fn的参数数量 // 大于等于：执行fn if (args.length &gt;= fn.length) { // fn(...args); fn.apply(this, args); } // 否则：返回一个接收剩余参数的函数 else { return function (...newArgs) { // 在函数内部，拼接参数，递归 // return curryFn(...args, ...newArgs); return curryFn.apply(this, args.concat(newArgs)) } } } } function foo(x, y, z) { console.log(x + y + z); } var curryFoo = myCurrying(foo); var curry1 = curryFoo(10, 20); curry1(1); curryFoo(10)(20)(30); function logInfo(date, type, message) { console.
+        <a href="/posts/2023.6.15/">...</a>
       
     </p>
   </article>
