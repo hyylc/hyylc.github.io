@@ -19,15 +19,6 @@ We&amp;rsquo;ll start with creating a new site with a very basic template.</desc
     
     <item>
       <title>Migrate to Hugo from Jekyll</title>
-      <link>https://hyylc.github.io/posts/2023.6.15/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://hyylc.github.io/posts/2023.6.15/</guid>
-      <description>手写自动柯里化函数#function myCurrying(fn) { // args接收剩余参数 return function curryFn(...args) { // 判断当前参数数量是否大于等于fn的参数数量 // 大于等于：执行fn if (args.length &amp;gt;= fn.length) { // fn(...args); fn.apply(this, args); } // 否则：返回一个接收剩余参数的函数 else { return function (...newArgs) { // 在函数内部，拼接参数，递归 // return curryFn(...args, ...newArgs); return curryFn.apply(this, args.concat(newArgs)) } } } } function foo(x, y, z) { console.log(x + y + z); } var curryFoo = myCurrying(foo); var curry1 = curryFoo(10, 20); curry1(1); curryFoo(10)(20)(30); function logInfo(date, type, message) { console.</description>
-    </item>
-    
-    <item>
-      <title>Migrate to Hugo from Jekyll</title>
       <link>https://hyylc.github.io/posts/migrate-from-jekyll/</link>
       <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
       

@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="手写自动柯里化函数#function myCurrying(fn) { // args接收剩余参数 return function curryFn(...args) { // 判断当前参数数量是否大于等于fn的参数数量 // 大于等于：执行fn if (args.length &gt;= fn.length) { // fn(...args); fn.apply(this, args); } // 否则：返回一个接收剩余参数的函数 else { return function (...newArgs) { // 在函数内部，拼接参数，递归 // return curryFn(...args, ...newArgs); return curryFn.apply(this, args.concat(newArgs)) } } } } function foo(x, y, z) { console.log(x &#43; y &#43; z); } var curryFoo = myCurrying(foo); var curry1 = curryFoo(10, 20); curry1(1); curryFoo(10)(20)(30); function logInfo(date, type, message) { console.">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="函数柯里化和Promise" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://hyylc.github.io/docs/blog/day27_2023.6.15/" />
-<title>Day27 2023.6.15 | Hyy小站</title>
+<title>函数柯里化和Promise | Hyy小站</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.ee97a19f27450f80c5a8e75bbfe836ba2743923ae51face6321da3a67d02bc4a.js" integrity="sha256-7pehnydFD4DFqOdbv&#43;g2uidDkjrlH6zmMh2jpn0CvEo=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.c0e1b53bece91775d4761b59eed61808727d917e8fd8227f44a191227887065e.js" integrity="sha256-wOG1O&#43;zpF3XUdhtZ7tYYCHJ9kX6P2CJ/RKGRIniHBl4=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="https://hyylc.github.io/docs/blog/day27_2023.6.15/index.xml" title="Hyy小站" />
 <!--
 Made with Book Theme
@@ -181,7 +181,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/blog/" class="">test</a>
+    <a href="/docs/blog/" class="">我的笔记</a>
   
 
           
@@ -194,7 +194,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/blog/day27_2023.6.15/" class="active">Day27 2023.6.15</a>
+    <a href="/docs/blog/day27_2023.6.15/" class="active">函数柯里化和Promise</a>
   
 
           
@@ -427,7 +427,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Day27 2023.6.15</strong>
+  <strong>函数柯里化和Promise</strong>
 
   <label for="toc-control">
     
@@ -443,7 +443,8 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#手写自动柯里化函数">手写自动柯里化函数</a></li>
+    <li><a href="#promise再学习">Promise再学习！</a>
       <ul>
         <li></li>
       </ul>
@@ -460,10 +461,10 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="手写自动柯里化函数">
+  <article class="markdown"><h2 id="手写自动柯里化函数">
   手写自动柯里化函数
   <a class="anchor" href="#%e6%89%8b%e5%86%99%e8%87%aa%e5%8a%a8%e6%9f%af%e9%87%8c%e5%8c%96%e5%87%bd%e6%95%b0">#</a>
-</h1>
+</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">myCurrying</span>(<span style="color:#a6e22e">fn</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// args接收剩余参数
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">curryFn</span>(...<span style="color:#a6e22e">args</span>) {
@@ -504,10 +505,10 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">curryLogInfo</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">myCurrying</span>(<span style="color:#a6e22e">logInfo</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">logToday</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">curryLogInfo</span>(<span style="color:#66d9ef">new</span> Date());
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">logToday</span>(<span style="color:#e6db74">&#34;DEBUG&#34;</span>)(<span style="color:#e6db74">&#39;修复一个错误&#39;</span>);
-</span></span></code></pre></div><h1 id="promise再学习">
+</span></span></code></pre></div><h2 id="promise再学习">
   Promise再学习！
   <a class="anchor" href="#promise%e5%86%8d%e5%ad%a6%e4%b9%a0">#</a>
-</h1>
+</h2>
 <h4 id="理解">
   理解
   <a class="anchor" href="#%e7%90%86%e8%a7%a3">#</a>
@@ -572,7 +573,8 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#手写自动柯里化函数">手写自动柯里化函数</a></li>
+    <li><a href="#promise再学习">Promise再学习！</a>
       <ul>
         <li></li>
       </ul>
