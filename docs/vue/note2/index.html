@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="组合式API是一系列API的集合，使我们能够使用函数的方式书写组件，包括：
+响应式API：ref() reactive()等 生命周期钩子：onMounted() onUnmounted()等 依赖注入：provide() inject() setup() 钩子是在组件中使用组合式 API 的入口。在 setup() 函数中返回的对象会暴露给模板和组件实例。其他的选项也可以通过组件实例来获取 setup() 暴露的属性。
+setup()#setup() 函数是最早执行的，只执行一次，接收参数 组件的props 和 上下文context，返回 data 和 method。 props 是响应式的，为了在解构 props 时仍保持响应性，可以在 setup() 函数中使用 toRefs() 函数。 context 是普通对象，非响应式的。包含三个属性： attrs：接收父组件传递过来的，并且没有在props中声明的参数。 emit：用来在子组件中对父组件发送事件。在vue2中，子对父发送事件采用this.$emit；在vue3中，子组件对父组件发送事件采用 context.emit。 slots：（这个不太懂）。 响应式：核心#ref()#https://juejin.cn/post/7225474899481051173
+用于将基本数据类型包装成响应式对象，ref是使用class里的get/set进行数据劫持和更新的。 .value 属性给予了 Vue 一个机会来检测 ref 何时被访问或修改。在其内部，Vue 在它的 getter 中执行追踪，在它的 setter 中执行触发。 在setup()里访问时，要加.value。从setup()里返回后，在模板里使用会自动解包，但是深层次的数据还是需要加.value才能访问。 reactive()#接收对象数据类型，使其成为响应式数据。
+响应式对象内的ref属性会被解包；响应式数组或 Map 这样的原生集合类型中的 ref 元素时，不会执行 ref 的解包： const count = ref(1) const obj = reactive({ count }) // ref 会被解包 console.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Vue组合式API" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://hyylc.github.io/docs/vue/note2/" />
+<title>Vue组合式API | Hyy小站</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.8a216eee61b22bcb1beec0f53f218bc4a6804534727df23a180fdb9f2b7486bb.js" integrity="sha256-iiFu7mGyK8sb7sD1PyGLxKaARTRyffI6GA/bnyt0hrs=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="https://hyylc.github.io/docs/vue/note2/index.xml" title="Hyy小站" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Hyy小站</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/js/" class="">JS笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note2/" class="">手写函数</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note1/" class="">函数柯里化和Promise</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note3/" class="">JS内置对象Array（一）</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/vue/" class="">Vue笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/vue/note1/" class="">Vue响应式原理</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/vue/note2/" class="active">Vue组合式API</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BD%91%E7%BB%9C/" class="">网络笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BD%91%E7%BB%9C/note1/" class="">前端跨域问题</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Vue组合式API</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#setup">setup()</a></li>
+    <li><a href="#响应式核心">响应式：核心</a>
+      <ul>
+        <li><a href="#ref">ref()</a></li>
+        <li><a href="#reactive">reactive()</a></li>
+        <li><a href="#watch">watch()</a></li>
+        <li><a href="#watcheffect副作用函数-配置选项">watchEffect(副作用函数, 配置选项)</a></li>
+        <li><a href="#computed">computed()</a></li>
+        <li><a href="#readonly">readonly()</a></li>
+        <li><a href="#watchposteffect">watchPostEffect()</a></li>
+        <li><a href="#watchsynceffect">watchSyncEffect()</a></li>
+      </ul>
+    </li>
+    <li><a href="#响应式工具">响应式：工具</a>
+      <ul>
+        <li><a href="#isref">isRef()</a></li>
+        <li><a href="#unref">unRef()</a></li>
+        <li><a href="#toref">toRef()</a></li>
+        <li><a href="#tovalue">toValue()</a></li>
+        <li><a href="#torefs">toRefs()</a></li>
+        <li><a href="#isproxy">isProxy()</a></li>
+        <li><a href="#isreactive">isReactive()</a></li>
+        <li><a href="#isreadonly">isReadonly()</a></li>
+      </ul>
+    </li>
+    <li><a href="#响应式进阶">响应式：进阶</a></li>
+    <li><a href="#生命周期钩子">生命周期钩子</a></li>
+    <li><a href="#注入依赖">注入依赖</a>
+      <ul>
+        <li><a href="#provide--inject">provide() &amp; inject()</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p><img src="https://cdn.nlark.com/yuque/0/2023/png/29755668/1690455604405-e0e07c4c-efa9-4aea-907e-8505ae567617.png#averageHue=%23fafafa&amp;clientId=ub6c80ed2-1671-4&amp;from=paste&amp;height=547&amp;id=ua10776d4&amp;originHeight=820&amp;originWidth=1059&amp;originalType=binary&amp;ratio=1.5&amp;rotation=0&amp;showTitle=false&amp;size=103999&amp;status=done&amp;style=none&amp;taskId=ud90dae6b-3400-432c-8829-1b2d90b6b46&amp;title=&amp;width=706" alt="image.png" />
+组合式API是一系列API的集合，使我们能够使用函数的方式书写组件，包括：</p>
+<ul>
+<li>响应式API：ref()  reactive()等</li>
+<li>生命周期钩子：onMounted()  onUnmounted()等</li>
+<li>依赖注入：provide()  inject()</li>
+</ul>
+<p>setup() 钩子是在组件中使用组合式 API 的入口。在 setup() 函数中返回的对象会暴露给模板和组件实例。其他的选项也可以通过组件实例来获取 setup() 暴露的属性。</p>
+<h2 id="setup">
+  setup()
+  <a class="anchor" href="#setup">#</a>
+</h2>
+<ul>
+<li>setup() 函数是最早执行的，只执行一次，接收参数 组件的props 和 上下文context，返回 data 和 method。</li>
+<li>props 是响应式的，为了在解构 props 时仍保持响应性，可以在 setup() 函数中使用 toRefs() 函数。</li>
+<li>context 是普通对象，非响应式的。包含三个属性：
+<ul>
+<li>attrs：接收父组件传递过来的，并且没有在props中声明的参数。</li>
+<li>emit：用来在子组件中对父组件发送事件。在vue2中，子对父发送事件采用this.$emit；在vue3中，子组件对父组件发送事件采用 context.emit。</li>
+<li>slots：（这个不太懂）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="响应式核心">
+  响应式：核心
+  <a class="anchor" href="#%e5%93%8d%e5%ba%94%e5%bc%8f%e6%a0%b8%e5%bf%83">#</a>
+</h2>
+<h3 id="ref">
+  ref()
+  <a class="anchor" href="#ref">#</a>
+</h3>
+<p><a href="https://juejin.cn/post/7225474899481051173">https://juejin.cn/post/7225474899481051173</a></p>
+<ul>
+<li>用于将基本数据类型包装成响应式对象，ref是使用class里的get/set进行数据劫持和更新的。</li>
+<li>.value 属性给予了 Vue 一个机会来检测 ref 何时被访问或修改。在其内部，Vue 在它的 getter 中执行追踪，在它的 setter 中执行触发。</li>
+<li>在setup()里访问时，要加.value。从setup()里返回后，在模板里使用会自动解包，但是深层次的数据还是需要加.value才能访问。</li>
+</ul>
+<h3 id="reactive">
+  reactive()
+  <a class="anchor" href="#reactive">#</a>
+</h3>
+<p>接收对象数据类型，使其成为响应式数据。</p>
+<ul>
+<li><strong>响应式对象</strong>内的ref属性会被解包；响应式数组或 Map 这样的原生集合类型中的 ref 元素时，<strong>不会</strong>执行 ref 的解包：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">count</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ref</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">reactive</span>({ <span style="color:#a6e22e">count</span> })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ref 会被解包
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">count</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">count</span>.<span style="color:#a6e22e">value</span>) <span style="color:#75715e">// true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">books</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">reactive</span>([<span style="color:#a6e22e">ref</span>(<span style="color:#e6db74">&#39;Vue 3 Guide&#39;</span>)])
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 这里需要 .value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">books</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">value</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">map</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">reactive</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Map</span>([[<span style="color:#e6db74">&#39;count&#39;</span>, <span style="color:#a6e22e">ref</span>(<span style="color:#ae81ff">0</span>)]]))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 这里需要 .value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">map</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;count&#39;</span>).<span style="color:#a6e22e">value</span>)
+</span></span></code></pre></div><p>reactive的缺陷：</p>
+<ul>
+<li>参数只接受对象类型 Array Object Map Set</li>
+<li>将属性赋值或解构到本地变量，或者传入一个函数时，会丧失响应性</li>
+<li>原因：js没有可以作用域所有值类型的“引用”</li>
+<li>解决：提供 ref() 为任何值类型的数据创建响应式，为 ref 对象包装一个.value属性</li>
+</ul>
+<h3 id="watch">
+  watch()
+  <a class="anchor" href="#watch">#</a>
+</h3>
+<ul>
+<li>三个参数：侦听的响应式引用或getter函数、回调函数、配置选项（比如 immediate, deep, flush）</li>
+<li>具有一定的惰性lazy，第一次页面展示的时候不会执行，只有数据变化的时候才会执行</li>
+<li>只监听的给定的数据源</li>
+<li>参数可以拿到当前值和原始值</li>
+</ul>
+<h3 id="watcheffect副作用函数-配置选项">
+  watchEffect(副作用函数, 配置选项)
+  <a class="anchor" href="#watcheffect%e5%89%af%e4%bd%9c%e7%94%a8%e5%87%bd%e6%95%b0-%e9%85%8d%e7%bd%ae%e9%80%89%e9%a1%b9">#</a>
+</h3>
+<ul>
+<li>立即执行，没有惰性，页面的首次加载就会执行</li>
+<li>不需要传递要侦听的内容 会自动感知代码依赖，不需要传递很多参数，只要传递一个回调函数</li>
+<li>自动监听回调中所有能访问的响应式属性</li>
+<li>只能获取当前值，不能获取之前数据的值</li>
+</ul>
+<h3 id="computed">
+  computed()
+  <a class="anchor" href="#computed">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vue" data-lang="vue"><span style="display:flex;"><span><span style="color:#75715e">// 1.选项式写法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">firstName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ref</span>(<span style="color:#e6db74">&#34;yy&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">lastName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ref</span>(<span style="color:#e6db74">&#34;h&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">computed</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">get</span>() {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">firstName</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">lastName</span>.<span style="color:#a6e22e">value</span>;
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">newVal</span>) {
+</span></span><span style="display:flex;"><span>      [<span style="color:#a6e22e">firstName</span>.<span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">lastName</span>.<span style="color:#a6e22e">value</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">newVal</span>.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;-&#34;</span>);
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">changeName</span> <span style="color:#f92672">=</span> () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;l-cj&#34;</span>;
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// 2.函数式写法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">name1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">computed</span>(() =&gt; <span style="color:#a6e22e">firstName</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">lastName</span>.<span style="color:#a6e22e">value</span>);
+</span></span></code></pre></div><h3 id="readonly">
+  readonly()
+  <a class="anchor" href="#readonly">#</a>
+</h3>
+<p>接受一个对象 (响应式或纯对象) 或 ref 并返回原始对象的只读代理，不能修改只读副本。只读代理是深层的：任何被访问的嵌套 property 也是只读的。</p>
+<h3 id="watchposteffect">
+  watchPostEffect()
+  <a class="anchor" href="#watchposteffect">#</a>
+</h3>
+<p><a href="https://cn.vuejs.org/api/reactivity-core.html#watcheffect">watchEffect()</a> 使用 flush: &lsquo;post&rsquo; 选项时的别名。</p>
+<h3 id="watchsynceffect">
+  watchSyncEffect()
+  <a class="anchor" href="#watchsynceffect">#</a>
+</h3>
+<p><a href="https://cn.vuejs.org/api/reactivity-core.html#watcheffect">watchEffect()</a> 使用 flush: &lsquo;sync&rsquo; 选项时的别名。</p>
+<h2 id="响应式工具">
+  响应式：工具
+  <a class="anchor" href="#%e5%93%8d%e5%ba%94%e5%bc%8f%e5%b7%a5%e5%85%b7">#</a>
+</h2>
+<h3 id="isref">
+  isRef()
+  <a class="anchor" href="#isref">#</a>
+</h3>
+<p>检查某个值是否为 ref。</p>
+<h3 id="unref">
+  unRef()
+  <a class="anchor" href="#unref">#</a>
+</h3>
+<p>如果参数是 ref，则返回内部值，否则返回参数本身。</p>
+<h3 id="toref">
+  toRef()
+  <a class="anchor" href="#toref">#</a>
+</h3>
+<p>可以将值、refs 或 getters 规范化为 refs。
+在一个响应式对象里面，想把其中一个属性拿出来单独做响应式，可以使用toRef(obj, attrName)。</p>
+<ul>
+<li>用于响应式对象，修改响应式数据会影响到原始数据。</li>
+<li>如果用于普通对象，则不具备响应式（数据的值改变了，但是视图不会变化）。</li>
+<li>和ref的区别：ref本质是拷贝，修改响应式数据不会影响原始数据；toRef的本质是引用关系，修改响应式数据会影响原始数据。</li>
+</ul>
+<h3 id="tovalue">
+  toValue()
+  <a class="anchor" href="#tovalue">#</a>
+</h3>
+<p>将值、refs 或 getters 规范化为值。</p>
+<h3 id="torefs">
+  toRefs()
+  <a class="anchor" href="#torefs">#</a>
+</h3>
+<p>当需要解构响应式对象，且希望解构后的对象也保持响应性是，可以使用toRefs(reactiveObj)。</p>
+<h3 id="isproxy">
+  isProxy()
+  <a class="anchor" href="#isproxy">#</a>
+</h3>
+<p>检查一个对象是否是由 <a href="https://cn.vuejs.org/api/reactivity-core.html#reactive">reactive()</a>、<a href="https://cn.vuejs.org/api/reactivity-core.html#readonly">readonly()</a>、<a href="https://cn.vuejs.org/api/reactivity-advanced.html#shallowreactive">shallowReactive()</a> 或 <a href="https://cn.vuejs.org/api/reactivity-advanced.html#shallowreadonly">shallowReadonly()</a> 创建的代理。</p>
+<h3 id="isreactive">
+  isReactive()
+  <a class="anchor" href="#isreactive">#</a>
+</h3>
+<p>检查一个对象是否是由 <a href="https://cn.vuejs.org/api/reactivity-core.html#reactive">reactive()</a> 或 <a href="https://cn.vuejs.org/api/reactivity-advanced.html#shallowreactive">shallowReactive()</a> 创建的代理。</p>
+<h3 id="isreadonly">
+  isReadonly()
+  <a class="anchor" href="#isreadonly">#</a>
+</h3>
+<p>检查传入的值是否为只读对象。只读对象的属性可以更改，但他们不能通过传入的对象直接赋值。</p>
+<h2 id="响应式进阶">
+  响应式：进阶
+  <a class="anchor" href="#%e5%93%8d%e5%ba%94%e5%bc%8f%e8%bf%9b%e9%98%b6">#</a>
+</h2>
+<p><a href="https://cn.vuejs.org/api/reactivity-advanced.html">响应式 API：进阶 | Vue.js</a></p>
+<h2 id="生命周期钩子">
+  生命周期钩子
+  <a class="anchor" href="#%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f%e9%92%a9%e5%ad%90">#</a>
+</h2>
+<p><a href="https://cn.vuejs.org/api/composition-api-lifecycle.html">组合式 API：生命周期钩子 | Vue.js</a></p>
+<h2 id="注入依赖">
+  注入依赖
+  <a class="anchor" href="#%e6%b3%a8%e5%85%a5%e4%be%9d%e8%b5%96">#</a>
+</h2>
+<p><a href="https://cn.vuejs.org/api/composition-api-dependency-injection.html">组合式 API：依赖注入 | Vue.js</a>
+onRenderTracked() 状态跟踪，会跟踪页面上所有响应式变量和方法的状态
+onRenderTriggered() 状态触发，只有值变化时会触发该回调函数，明确给出新值和旧值</p>
+<h3 id="provide--inject">
+  provide() &amp; inject()
+  <a class="anchor" href="#provide--inject">#</a>
+</h3>
+<ul>
+<li>父级组件使用provide向下进行传递数据。</li>
+<li>子级组件使用inject来获取上级组件传递过来的数据。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/webp/29755668/1690445227440-7310b39a-da9e-48b3-a683-dfceadf6dcc9.webp#averageHue=%23a3a4a2&amp;clientId=u9bcb720c-e50d-4&amp;from=paste&amp;id=u94b967a5&amp;originHeight=1024&amp;originWidth=1353&amp;originalType=url&amp;ratio=1.5&amp;rotation=0&amp;showTitle=false&amp;status=done&amp;style=none&amp;taskId=ub83280ae-edc3-4c59-9529-661e702b4fd&amp;title=" alt="" /></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#setup">setup()</a></li>
+    <li><a href="#响应式核心">响应式：核心</a>
+      <ul>
+        <li><a href="#ref">ref()</a></li>
+        <li><a href="#reactive">reactive()</a></li>
+        <li><a href="#watch">watch()</a></li>
+        <li><a href="#watcheffect副作用函数-配置选项">watchEffect(副作用函数, 配置选项)</a></li>
+        <li><a href="#computed">computed()</a></li>
+        <li><a href="#readonly">readonly()</a></li>
+        <li><a href="#watchposteffect">watchPostEffect()</a></li>
+        <li><a href="#watchsynceffect">watchSyncEffect()</a></li>
+      </ul>
+    </li>
+    <li><a href="#响应式工具">响应式：工具</a>
+      <ul>
+        <li><a href="#isref">isRef()</a></li>
+        <li><a href="#unref">unRef()</a></li>
+        <li><a href="#toref">toRef()</a></li>
+        <li><a href="#tovalue">toValue()</a></li>
+        <li><a href="#torefs">toRefs()</a></li>
+        <li><a href="#isproxy">isProxy()</a></li>
+        <li><a href="#isreactive">isReactive()</a></li>
+        <li><a href="#isreadonly">isReadonly()</a></li>
+      </ul>
+    </li>
+    <li><a href="#响应式进阶">响应式：进阶</a></li>
+    <li><a href="#生命周期钩子">生命周期钩子</a></li>
+    <li><a href="#注入依赖">注入依赖</a>
+      <ul>
+        <li><a href="#provide--inject">provide() &amp; inject()</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

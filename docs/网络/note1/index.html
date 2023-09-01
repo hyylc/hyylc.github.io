@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="跨域#跨域是指一个域下的文档或脚本去请求另一个域下的资源。通常说的跨域是指浏览器不能执行其他网站的脚本。它是浏览器同源策略造成的，是浏览器对JS实施的安全限制。
+同源策略#它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSRF等攻击。同源策略限制以下行为：
+Cookie、LocalStorage 和 IndexDB 无法读取 DOM 和 Js对象无法获得 AJAX 请求不能发送 三种思路#解除浏览器的跨域限制 发送JSON请求而不是xhr请求 修改服务器端（CORS） 解决方案#vue.config.js中proxy（代理，将浏览器的请求转发到服务器）#首先浏览器是禁止跨域的，但是服务端不禁止，在本地运行 npm run dev 等命令时实际上是用 node 运行了一个服务器，因此 proxyTable 实际上是将请求发给自己的服务器，再由服务器转发给后台服务器，做了一层代理。vue的proxyTable用的是http-proxy-middleware中间件, 因此不会出现跨域问题。
+CORS（第三种思路）#跨域资源共享 CORS 详解 - 阮一峰的网络日志
+JSONP（第二种思路）#利用script标签的src属性请求资源，缺点是只支持get请求。
+mac设置Chrome跨域（第一种思路）#原理：禁止浏览器进行跨域检查
+打开终端 运行命令：open -n /Applications/Google\ Chrome.app/ &ndash;args &ndash;disable-web-security &ndash;user-data-dir=/Users/zhongan/Documents/MyChromeDevUserData ">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="前端跨域问题" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://hyylc.github.io/docs/%E7%BD%91%E7%BB%9C/note1/" />
+<title>前端跨域问题 | Hyy小站</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.8a216eee61b22bcb1beec0f53f218bc4a6804534727df23a180fdb9f2b7486bb.js" integrity="sha256-iiFu7mGyK8sb7sD1PyGLxKaARTRyffI6GA/bnyt0hrs=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="https://hyylc.github.io/docs/%E7%BD%91%E7%BB%9C/note1/index.xml" title="Hyy小站" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Hyy小站</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/js/" class="">JS笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note2/" class="">手写函数</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note1/" class="">函数柯里化和Promise</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note3/" class="">JS内置对象Array（一）</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/vue/" class="">Vue笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/vue/note1/" class="">Vue响应式原理</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/vue/note2/" class="">Vue组合式API</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BD%91%E7%BB%9C/" class="">网络笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BD%91%E7%BB%9C/note1/" class="active">前端跨域问题</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>前端跨域问题</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#vueconfigjs中proxy代理将浏览器的请求转发到服务器">vue.config.js中proxy（代理，将浏览器的请求转发到服务器）</a></li>
+        <li><a href="#cors第三种思路">CORS（第三种思路）</a></li>
+        <li><a href="#jsonp第二种思路">JSONP（第二种思路）</a></li>
+        <li><a href="#mac设置chrome跨域第一种思路">mac设置Chrome跨域（第一种思路）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="跨域">
+  跨域
+  <a class="anchor" href="#%e8%b7%a8%e5%9f%9f">#</a>
+</h1>
+<p>跨域是指一个域下的文档或脚本去请求另一个域下的资源。通常说的跨域是指浏览器不能执行其他网站的脚本。它是浏览器同源策略造成的，是浏览器对JS实施的安全限制。</p>
+<h1 id="同源策略">
+  同源策略
+  <a class="anchor" href="#%e5%90%8c%e6%ba%90%e7%ad%96%e7%95%a5">#</a>
+</h1>
+<p>它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSRF等攻击。同源策略限制以下行为：</p>
+<ul>
+<li>Cookie、LocalStorage 和 IndexDB 无法读取</li>
+<li>DOM 和 Js对象无法获得</li>
+<li>AJAX 请求不能发送</li>
+</ul>
+<h1 id="三种思路">
+  三种思路
+  <a class="anchor" href="#%e4%b8%89%e7%a7%8d%e6%80%9d%e8%b7%af">#</a>
+</h1>
+<ol>
+<li>解除浏览器的跨域限制</li>
+<li>发送JSON请求而不是xhr请求</li>
+<li>修改服务器端（CORS）</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/29755668/1691392006529-1db3642a-021f-4f8d-965c-33c9e63898d3.png#averageHue=%23fcfcfb&amp;clientId=ub321c0ba-d617-4&amp;from=paste&amp;height=387&amp;id=u608ab0ad&amp;originHeight=773&amp;originWidth=1440&amp;originalType=binary&amp;ratio=2&amp;rotation=0&amp;showTitle=false&amp;size=491266&amp;status=done&amp;style=none&amp;taskId=u2f7cf2d3-08fa-497f-9f5e-4e4aa9ca784&amp;title=&amp;width=720" alt="image.png" /></p>
+<h1 id="解决方案">
+  解决方案
+  <a class="anchor" href="#%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88">#</a>
+</h1>
+<h3 id="vueconfigjs中proxy代理将浏览器的请求转发到服务器">
+  vue.config.js中proxy（代理，将浏览器的请求转发到服务器）
+  <a class="anchor" href="#vueconfigjs%e4%b8%adproxy%e4%bb%a3%e7%90%86%e5%b0%86%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%af%b7%e6%b1%82%e8%bd%ac%e5%8f%91%e5%88%b0%e6%9c%8d%e5%8a%a1%e5%99%a8">#</a>
+</h3>
+<p>首先浏览器是禁止跨域的，但是服务端不禁止，在本地运行 npm run dev 等命令时实际上是用 node 运行了一个服务器，因此 proxyTable 实际上是将请求发给自己的服务器，再由服务器转发给后台服务器，做了一层代理。vue的proxyTable用的是http-proxy-middleware中间件, 因此不会出现跨域问题。</p>
+<h3 id="cors第三种思路">
+  CORS（第三种思路）
+  <a class="anchor" href="#cors%e7%ac%ac%e4%b8%89%e7%a7%8d%e6%80%9d%e8%b7%af">#</a>
+</h3>
+<p><a href="https://www.ruanyifeng.com/blog/2016/04/cors.html">跨域资源共享 CORS 详解 - 阮一峰的网络日志</a></p>
+<h3 id="jsonp第二种思路">
+  JSONP（第二种思路）
+  <a class="anchor" href="#jsonp%e7%ac%ac%e4%ba%8c%e7%a7%8d%e6%80%9d%e8%b7%af">#</a>
+</h3>
+<p>利用script标签的src属性请求资源，缺点是只支持get请求。</p>
+<h3 id="mac设置chrome跨域第一种思路">
+  mac设置Chrome跨域（第一种思路）
+  <a class="anchor" href="#mac%e8%ae%be%e7%bd%aechrome%e8%b7%a8%e5%9f%9f%e7%ac%ac%e4%b8%80%e7%a7%8d%e6%80%9d%e8%b7%af">#</a>
+</h3>
+<p>原理：禁止浏览器进行跨域检查</p>
+<ol>
+<li>打开终端</li>
+<li>运行命令：open -n /Applications/Google\ Chrome.app/ &ndash;args &ndash;disable-web-security  &ndash;user-data-dir=/Users/zhongan/Documents/MyChromeDevUserData</li>
+</ol>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#vueconfigjs中proxy代理将浏览器的请求转发到服务器">vue.config.js中proxy（代理，将浏览器的请求转发到服务器）</a></li>
+        <li><a href="#cors第三种思路">CORS（第三种思路）</a></li>
+        <li><a href="#jsonp第二种思路">JSONP（第二种思路）</a></li>
+        <li><a href="#mac设置chrome跨域第一种思路">mac设置Chrome跨域（第一种思路）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
