@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="element-ui#elementUI 源码-打造自己的组件库，系列二：Sass语法 BEM实现 Css编码规范_sass bem_海阔~天空的博客-CSDN博客
+SASS基本语法#变量#$variablename: value； !global 设置变量是全局的； !default 设置变量使用原值； 嵌套规则与属性#嵌套规则：通过缩进简写嵌套结构 nav { li { } ul { } } 嵌套属性：很多CSS属性有相同的前缀，可以嵌套来编写 font: { size : 18px; weight: bold; } @import 和 partials#不希望sass文件被编译为css文件，在文件名前面加上下划线 _文件名.sass 引用sass文件：@import &ldquo;文件名&rdquo;，如果文件名有下划线要去掉
+@mixin 和 @include#mixin（混入）可以定义一个能够重复使用的样式，能够接收参数(可以定义默认值)。 include 可以将混入定义的样式引入到文档中。
+@mixin important-text{ } @mixin b($color, $width) { border: $width solid $color; } .danger { @include important-text; @include b(red, 1px) } @extend 与继承#.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="element-ui" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://hyylc.github.io/docs/%E7%BB%84%E4%BB%B6%E5%BA%93/note1/" />
+<title>element-ui | Hyy小站</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.7948e4919cd47b9d28673aa5bdd1199c16d1e060a89a027b619785d3a18cafdf.js" integrity="sha256-eUjkkZzUe50oZzqlvdEZnBbR4GComgJ7YZeF06GMr98=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="https://hyylc.github.io/docs/%E7%BB%84%E4%BB%B6%E5%BA%93/note1/index.xml" title="Hyy小站" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Hyy小站</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/js/" class="">JS笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note2/" class="">手写函数</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note1/" class="">函数柯里化和Promise</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note3/" class="">JS内置对象Array（一）</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/vue/" class="">Vue笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/vue/note1/" class="">Vue响应式原理</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/vue/note2/" class="">Vue组合式API</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BD%91%E7%BB%9C/" class="">网络笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BD%91%E7%BB%9C/note1/" class="">前端跨域问题</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BB%84%E4%BB%B6%E5%BA%93/" class="">组件库笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BB%84%E4%BB%B6%E5%BA%93/note1/" class="active">element-ui</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/hugo/" class="">Hugo笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hugo/note1/" class="">hugo建站</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>element-ui</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#element-ui">element-ui</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="element-ui">
+  element-ui
+  <a class="anchor" href="#element-ui">#</a>
+</h2>
+<p><a href="https://blog.csdn.net/m13837120071/article/details/126208195">elementUI 源码-打造自己的组件库，系列二：Sass语法 BEM实现 Css编码规范_sass bem_海阔~天空的博客-CSDN博客</a></p>
+<h4 id="sass基本语法">
+  SASS基本语法
+  <a class="anchor" href="#sass%e5%9f%ba%e6%9c%ac%e8%af%ad%e6%b3%95">#</a>
+</h4>
+<h5 id="变量">
+  变量
+  <a class="anchor" href="#%e5%8f%98%e9%87%8f">#</a>
+</h5>
+<ul>
+<li>$variablename: value；</li>
+<li>!global 设置变量是全局的；</li>
+<li>!default 设置变量使用原值；</li>
+</ul>
+<h5 id="嵌套规则与属性">
+  嵌套规则与属性
+  <a class="anchor" href="#%e5%b5%8c%e5%a5%97%e8%a7%84%e5%88%99%e4%b8%8e%e5%b1%9e%e6%80%a7">#</a>
+</h5>
+<ul>
+<li>嵌套规则：通过缩进简写嵌套结构</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#f92672">nav</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">li</span> <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ul</span> {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span>
+</span></span></code></pre></div><ul>
+<li>嵌套属性：很多CSS属性有相同的前缀，可以嵌套来编写</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#f92672">font</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">size</span> : <span style="color:#ae81ff">18</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>  weight: <span style="color:#66d9ef">bold</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="import-和-partials">
+  @import 和 partials
+  <a class="anchor" href="#import-%e5%92%8c-partials">#</a>
+</h5>
+<p>不希望sass文件被编译为css文件，在文件名前面加上下划线 _文件名.sass
+引用sass文件：@import  &ldquo;文件名&rdquo;，如果文件名有下划线要去掉</p>
+<h5 id="mixin-和-include">
+  @mixin 和 @include
+  <a class="anchor" href="#mixin-%e5%92%8c-include">#</a>
+</h5>
+<p>mixin（混入）可以定义一个能够重复使用的样式，能够接收参数(可以定义默认值)。
+include 可以将混入定义的样式引入到文档中。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span>@<span style="color:#66d9ef">mixin</span> <span style="color:#f92672">important-text</span>{
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@<span style="color:#66d9ef">mixin</span> <span style="color:#f92672">b</span><span style="color:#f92672">($</span><span style="color:#f92672">color</span><span style="color:#f92672">,</span> <span style="color:#f92672">$</span><span style="color:#f92672">width</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">border</span><span style="color:#f92672">:</span> <span style="color:#f92672">$</span><span style="color:#f92672">width</span> <span style="color:#f92672">solid</span> <span style="color:#f92672">$</span><span style="color:#f92672">color</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">danger</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@include</span> <span style="color:#960050;background-color:#1e0010">important-text</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@include</span> <span style="color:#960050;background-color:#1e0010">b(red,</span> <span style="color:#960050;background-color:#1e0010">1px)</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="extend-与继承">
+  @extend 与继承
+  <a class="anchor" href="#extend-%e4%b8%8e%e7%bb%a7%e6%89%bf">#</a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span>.<span style="color:#a6e22e">button-basic</span> {
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">button-a</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@extend</span> <span style="color:#960050;background-color:#1e0010">.button-basic</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">button-b</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">@extend</span> <span style="color:#960050;background-color:#1e0010">.button-basic</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h5 id="content">
+  @content
+  <a class="anchor" href="#content">#</a>
+</h5>
+<p>内容混入</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span>@<span style="color:#66d9ef">mixin</span> <span style="color:#f92672">name</span> {
+</span></span><span style="display:flex;"><span>  @<span style="color:#66d9ef">content</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@<span style="color:#66d9ef">include</span> <span style="color:#f92672">name</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">...</span> <span style="color:#f92672">//</span><span style="color:#960050;background-color:#1e0010">这里的内容会被加到上面的</span> @<span style="color:#66d9ef">content</span> <span style="color:#960050;background-color:#1e0010">位置</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span>
+</span></span></code></pre></div><h5 id="at-root">
+  @at-root
+  <a class="anchor" href="#at-root">#</a>
+</h5>
+<h5 id="each-in">
+  @each in
+  <a class="anchor" href="#each-in">#</a>
+</h5>
+<h5 id="if-else">
+  @if @else
+  <a class="anchor" href="#if-else">#</a>
+</h5>
+<h5 id="内置函数">
+  内置函数
+  <a class="anchor" href="#%e5%86%85%e7%bd%ae%e5%87%bd%e6%95%b0">#</a>
+</h5>
+<ul>
+<li>map-has-key($map, $key)</li>
+<li>map-get($map, $key)</li>
+<li>unquote($string)   删除引号</li>
+<li>inspect($value)</li>
+<li>str-index($str, $value) 下标从1开始</li>
+<li>str-slice($str, $value)</li>
+</ul>
+<h5 id="sass基本语法总结httpszhuanlanzhihucomp143500973">
+  <a href="https://zhuanlan.zhihu.com/p/143500973">SASS基本语法总结</a>
+  <a class="anchor" href="#sass%e5%9f%ba%e6%9c%ac%e8%af%ad%e6%b3%95%e6%80%bb%e7%bb%93httpszhuanlanzhihucomp143500973">#</a>
+</h5>
+<ul>
+<li>父选择器引用：&amp;代表父选择器简写，必须为前缀，否则sass会抛出错误</li>
+</ul>
+<h4 id="bemcss命名规范连接方式">
+  BEM——CSS命名规范（连接方式）
+  <a class="anchor" href="#bemcss%e5%91%bd%e5%90%8d%e8%a7%84%e8%8c%83%e8%bf%9e%e6%8e%a5%e6%96%b9%e5%bc%8f">#</a>
+</h4>
+<p>$namespace: &rsquo;el&rsquo;; // 所有的组件以el开头，如el-input
+$element-separator: &lsquo;__&rsquo;; // 元素以__分割，如el-input__inner
+$modifier-separator: &lsquo;&ndash;&rsquo;; // 修饰符以&ndash;分割，如el-input&ndash;mini
+$state-prefix: &lsquo;is-&rsquo;; // 状态以is-开头，如is-disabled</p>
+<h5 id="bem实现">
+  BEM实现
+  <a class="anchor" href="#bem%e5%ae%9e%e7%8e%b0">#</a>
+</h5>
+<p>问题：hitAllSpecialNestRule判断父级选择器（$selector: &amp;），是否包含&ndash; .is- ：这三种字符，对应不同的处理方式，这里有点不太理解。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#75715e">/* BEM
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> -------------------------- */</span>
+</span></span><span style="display:flex;"><span>@<span style="color:#66d9ef">mixin</span> <span style="color:#f92672">b</span><span style="color:#f92672">($</span><span style="color:#f92672">block</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">$</span><span style="color:#f92672">B</span><span style="color:#f92672">:</span> <span style="color:#f92672">$</span><span style="color:#f92672">namespace</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">+$</span><span style="color:#f92672">block</span> <span style="color:#f92672">!</span><span style="color:#f92672">global</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">.</span><span style="color:#960050;background-color:#1e0010">#</span>{<span style="color:#960050;background-color:#1e0010">$B</span>} {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">@content</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@<span style="color:#66d9ef">mixin</span> <span style="color:#f92672">e</span><span style="color:#f92672">($</span><span style="color:#f92672">element</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">$</span><span style="color:#f92672">E</span><span style="color:#f92672">:</span> <span style="color:#f92672">$</span><span style="color:#f92672">element</span> <span style="color:#f92672">!</span><span style="color:#f92672">global</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">$</span><span style="color:#f92672">selector</span><span style="color:#f92672">:</span> <span style="color:#f92672">&amp;;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">$</span><span style="color:#f92672">currentSelector</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>  @<span style="color:#66d9ef">each</span> <span style="color:#f92672">$</span><span style="color:#f92672">unit</span> <span style="color:#f92672">in</span> <span style="color:#f92672">$</span><span style="color:#f92672">element</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">$</span><span style="color:#f92672">currentSelector</span><span style="color:#f92672">:</span> <span style="color:#960050;background-color:#1e0010">#</span>{<span style="color:#960050;background-color:#1e0010">$currentSelector</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#960050;background-color:#1e0010">&#34;.&#34;</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#960050;background-color:#1e0010">$B</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#960050;background-color:#1e0010">$element-separator</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#960050;background-color:#1e0010">$unit</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#960050;background-color:#1e0010">&#34;,&#34;</span>}<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  @<span style="color:#66d9ef">if</span> <span style="color:#f92672">hitAllSpecialNestRule</span><span style="color:#f92672">($</span><span style="color:#f92672">selector</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>    @<span style="color:#66d9ef">at-root</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">#</span>{<span style="color:#960050;background-color:#1e0010">$selector</span>} {
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#{$currentSelector</span>} {
+</span></span><span style="display:flex;"><span>          <span style="color:#960050;background-color:#1e0010">@content</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  } @<span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    @<span style="color:#66d9ef">at-root</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">#</span>{<span style="color:#960050;background-color:#1e0010">$currentSelector</span>} {
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">@content</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@<span style="color:#66d9ef">mixin</span> <span style="color:#f92672">m</span><span style="color:#f92672">($</span><span style="color:#f92672">modifier</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">$</span><span style="color:#f92672">selector</span><span style="color:#f92672">:</span> <span style="color:#f92672">&amp;;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">$</span><span style="color:#f92672">currentSelector</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>  @<span style="color:#66d9ef">each</span> <span style="color:#f92672">$</span><span style="color:#f92672">unit</span> <span style="color:#f92672">in</span> <span style="color:#f92672">$</span><span style="color:#f92672">modifier</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">$</span><span style="color:#f92672">currentSelector</span><span style="color:#f92672">:</span> <span style="color:#960050;background-color:#1e0010">#</span>{<span style="color:#960050;background-color:#1e0010">$currentSelector</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#960050;background-color:#1e0010">&amp;</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#960050;background-color:#1e0010">$modifier-separator</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#960050;background-color:#1e0010">$unit</span> <span style="color:#960050;background-color:#1e0010">+</span> <span style="color:#960050;background-color:#1e0010">&#34;,&#34;</span>}<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  @<span style="color:#66d9ef">at-root</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>{<span style="color:#960050;background-color:#1e0010">$currentSelector</span>} {
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">@content</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="源码分析">
+  源码分析
+  <a class="anchor" href="#%e6%ba%90%e7%a0%81%e5%88%86%e6%9e%90">#</a>
+</h4>
+<ul>
+<li>基于js、vue实现，使用render函数或者组件模板（node_modules\element-ui\packages）</li>
+<li>样式sass（node_modules\element-ui\packages\theme-chalk\src\mixins）。</li>
+</ul>
+<p>以 el-row 为例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#75715e">/* 以下都是options选项 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">export</span> <span style="color:#f92672">default</span> {
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 组件名 */</span>
+</span></span><span style="display:flex;"><span>  name: <span style="color:#e6db74">&#39;ElRow&#39;</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  componentName<span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;ElRow&#39;</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  props<span style="color:#f92672">:</span> <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*  默认是div元素 */</span>
+</span></span><span style="display:flex;"><span>    tag<span style="color:#f92672">:</span> <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>      type<span style="color:#f92672">:</span> String,
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;div&#39;</span>
+</span></span><span style="display:flex;"><span>    }<span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*  列间距，在el-row左右两侧各添加一个gutter值/2的外边距 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">gutter</span><span style="color:#f92672">:</span> <span style="color:#f92672">Number</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">type</span><span style="color:#f92672">:</span> <span style="color:#f92672">String</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">justify</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      type: String,
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;start&#39;</span>
+</span></span><span style="display:flex;"><span>    }<span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">align</span><span style="color:#f92672">:</span> <span style="color:#f92672">String</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">}</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">computed</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">style()</span> <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">const</span> <span style="color:#960050;background-color:#1e0010">ret</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#960050;background-color:#1e0010">{</span>}<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">if</span> <span style="color:#f92672">(</span><span style="color:#f92672">this</span>.<span style="color:#a6e22e">gutter</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">ret.marginLeft</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#960050;background-color:#1e0010">`-${this.gutter</span> <span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#960050;background-color:#1e0010">2</span>}<span style="color:#f92672">px</span><span style="color:#960050;background-color:#1e0010">`</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ret</span>.<span style="color:#a6e22e">marginRight</span> <span style="color:#f92672">=</span> <span style="color:#f92672">ret</span>.<span style="color:#a6e22e">marginLeft</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">return</span> <span style="color:#f92672">ret</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">}</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">render</span><span style="color:#f92672">(</span><span style="color:#f92672">h</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">return</span> <span style="color:#960050;background-color:#1e0010">h(this.tag,</span> <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>      class: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;el-row&#39;</span>,
+</span></span><span style="display:flex;"><span>        this<span style="color:#f92672">.</span><span style="color:#66d9ef">justify</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;start&#39;</span> <span style="color:#f92672">?</span> <span style="color:#960050;background-color:#1e0010">`</span>is-justify-<span style="color:#960050;background-color:#1e0010">${</span>this<span style="color:#f92672">.</span><span style="color:#66d9ef">justify</span>}<span style="color:#960050;background-color:#1e0010">`</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">this</span>.<span style="color:#a6e22e">align</span> <span style="color:#f92672">?</span> <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#f92672">is-align-</span><span style="color:#f92672">$</span>{<span style="color:#960050;background-color:#1e0010">this.align</span>}<span style="color:#960050;background-color:#1e0010">`</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>        { <span style="color:#960050;background-color:#1e0010">&#39;el-row--flex&#39;:</span> <span style="color:#960050;background-color:#1e0010">this.type</span> <span style="color:#960050;background-color:#1e0010">===</span> <span style="color:#960050;background-color:#1e0010">&#39;flex&#39;</span> }
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">style</span><span style="color:#f92672">:</span> <span style="color:#f92672">this</span>.<span style="color:#a6e22e">style</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">}</span><span style="color:#f92672">,</span> <span style="color:#f92672">this</span><span style="color:#f92672">.$</span><span style="color:#f92672">slots</span>.<span style="color:#a6e22e">default</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span><span style="color:#f92672">;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span>@<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#34;common/var&#34;</span>;
+</span></span><span style="display:flex;"><span>@<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#34;mixins/mixins&#34;</span>;
+</span></span><span style="display:flex;"><span>@<span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#34;mixins/utils&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@<span style="color:#66d9ef">include</span> <span style="color:#f92672">b</span><span style="color:#f92672">(</span><span style="color:#f92672">row</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">position</span><span style="color:#f92672">:</span> <span style="color:#f92672">relative</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">box-sizing</span><span style="color:#f92672">:</span> <span style="color:#f92672">border-box</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>  @<span style="color:#66d9ef">include</span> <span style="color:#f92672">utils-clearfix</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  @<span style="color:#66d9ef">include</span> <span style="color:#f92672">m</span><span style="color:#f92672">(</span><span style="color:#f92672">flex</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">display</span><span style="color:#f92672">:</span> <span style="color:#f92672">flex</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&amp;</span>:<span style="color:#a6e22e">before</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&amp;</span>:<span style="color:#a6e22e">after</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">display</span>: <span style="color:#66d9ef">none</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @<span style="color:#66d9ef">include</span> <span style="color:#f92672">when</span><span style="color:#f92672">(</span><span style="color:#f92672">justify-center</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">justify-content</span><span style="color:#f92672">:</span> <span style="color:#f92672">center</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    @<span style="color:#66d9ef">include</span> <span style="color:#f92672">when</span><span style="color:#f92672">(</span><span style="color:#f92672">justify-end</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">justify-content</span><span style="color:#f92672">:</span> <span style="color:#f92672">flex-end</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    @<span style="color:#66d9ef">include</span> <span style="color:#f92672">when</span><span style="color:#f92672">(</span><span style="color:#f92672">justify-space-between</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">justify-content</span><span style="color:#f92672">:</span> <span style="color:#f92672">space-between</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    @<span style="color:#66d9ef">include</span> <span style="color:#f92672">when</span><span style="color:#f92672">(</span><span style="color:#f92672">justify-space-around</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">justify-content</span><span style="color:#f92672">:</span> <span style="color:#f92672">space-around</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @<span style="color:#66d9ef">include</span> <span style="color:#f92672">when</span><span style="color:#f92672">(</span><span style="color:#f92672">align-top</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">align-items</span><span style="color:#f92672">:</span> <span style="color:#f92672">flex-start</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @<span style="color:#66d9ef">include</span> <span style="color:#f92672">when</span><span style="color:#f92672">(</span><span style="color:#f92672">align-middle</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">align-items</span><span style="color:#f92672">:</span> <span style="color:#f92672">center</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    @<span style="color:#66d9ef">include</span> <span style="color:#f92672">when</span><span style="color:#f92672">(</span><span style="color:#f92672">align-bottom</span><span style="color:#f92672">)</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">align-items</span><span style="color:#f92672">:</span> <span style="color:#f92672">flex-end</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="使用">
+  使用
+  <a class="anchor" href="#%e4%bd%bf%e7%94%a8">#</a>
+</h4>
+<h5 id="layout布局">
+  Layout布局
+  <a class="anchor" href="#layout%e5%b8%83%e5%b1%80">#</a>
+</h5>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/29755668/1688708078835-f5aea089-dbd4-4953-9e69-12227450c5df.png#averageHue=%23fefefe&amp;clientId=u4dd8b1c6-424a-4&amp;from=paste&amp;height=299&amp;id=u68735d03&amp;originHeight=448&amp;originWidth=1093&amp;originalType=binary&amp;ratio=1.5&amp;rotation=0&amp;showTitle=false&amp;size=40814&amp;status=done&amp;style=none&amp;taskId=uce1345d0-6c94-46f9-aa5c-7d28cb77499&amp;title=&amp;width=728.6666666666666" alt="image.png" />
+<img src="https://cdn.nlark.com/yuque/0/2023/png/29755668/1688708099154-1239e93d-2737-48c7-8b2c-a734867f7cee.png#averageHue=%23fefefe&amp;clientId=u4dd8b1c6-424a-4&amp;from=paste&amp;height=510&amp;id=ud209e0e1&amp;originHeight=765&amp;originWidth=1118&amp;originalType=binary&amp;ratio=1.5&amp;rotation=0&amp;showTitle=false&amp;size=81456&amp;status=done&amp;style=none&amp;taskId=uf50ea1ec-ea38-45c2-a523-109c7f1a5cf&amp;title=&amp;width=745.3333333333334" alt="image.png" /></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#f92672">template</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">div</span> <span style="color:#f92672">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;layout&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-row</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;24&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">24</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-row</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-row</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;18&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">18</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-row</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-row</span> :<span style="color:#a6e22e">gutter</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;</span><span style="color:#f92672">div</span> <span style="color:#f92672">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;background-color: turquoise;&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">6</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">div</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">6</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">6</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">6</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-row</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-row</span> <span style="color:#f92672">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;flex&#34;</span> <span style="color:#f92672">justify</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;space-between&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">6</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">6</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">6</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-row</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-row</span> <span style="color:#f92672">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;flex&#34;</span> <span style="color:#f92672">justify</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;space-around&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">6</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">6</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-col</span> :<span style="color:#a6e22e">span</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">6</span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-col</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-row</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">&lt;/</span><span style="color:#f92672">div</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">template</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#f92672">script</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">script</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#f92672">style</span> <span style="color:#f92672">scoped</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">el-row</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>: <span style="color:#66d9ef">pink</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">margin</span>: <span style="color:#ae81ff">20</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">0</span>; 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">box-sizing</span>: <span style="color:#66d9ef">border-box</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">el-col</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>: rgb(<span style="color:#ae81ff">39</span>, <span style="color:#ae81ff">82</span>, <span style="color:#ae81ff">28</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">white</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">padding</span>: <span style="color:#ae81ff">10</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">border-right</span>: <span style="color:#ae81ff">2</span><span style="color:#66d9ef">px</span> <span style="color:#ae81ff">#ccc</span> <span style="color:#66d9ef">solid</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">style</span><span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><h5 id="container容器">
+  Container容器
+  <a class="anchor" href="#container%e5%ae%b9%e5%99%a8">#</a>
+</h5>
+<p>el-container(如果有el-header或者el-footer，排列方向是vertical，子元素会垂直上下排列。)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#f92672">template</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span><span style="color:#f92672">div</span> <span style="color:#f92672">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-container</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-header</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">header</span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-header</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-container</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-aside</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">aside</span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-aside</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-main</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">main</span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-main</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-container</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;</span><span style="color:#f92672">el-footer</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">footer</span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-footer</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/</span><span style="color:#f92672">el-container</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/</span><span style="color:#f92672">div</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">template</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#f92672">script</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">script</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#f92672">style</span> <span style="color:#f92672">scoped</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">el-container</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#ccc</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">color</span>: <span style="color:#66d9ef">white</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">el-header</span> {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>: <span style="color:#ae81ff">#B3C0D1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">el-main</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>: <span style="color:#66d9ef">pink</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">el-aside</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">min-width</span>: <span style="color:#ae81ff">200</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">min-height</span>: <span style="color:#ae81ff">350</span><span style="color:#66d9ef">px</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>: rgb(<span style="color:#ae81ff">190</span>, <span style="color:#ae81ff">121</span>, <span style="color:#ae81ff">121</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">el-footer</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">background-color</span>: rgb(<span style="color:#ae81ff">145</span>, <span style="color:#ae81ff">136</span>, <span style="color:#ae81ff">136</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/</span><span style="color:#f92672">style</span><span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><h4 id="icon和link">
+  Icon和Link
+  <a class="anchor" href="#icon%e5%92%8clink">#</a>
+</h4>
+<ul>
+<li>icon：<!-- raw HTML omitted --><!-- raw HTML omitted -->标签，设置类名为el-icon-iconName来使用（class=&ldquo;el-icon-iconName&rdquo;，在<!-- raw HTML omitted -->中写对应的样式；一开始写成了 icon=&ldquo;el-icon-iconName&rdquo;，.el-icon-iconName中的样式没有生效）</li>
+<li>link文字链接：<!-- raw HTML omitted --><!-- raw HTML omitted -->标签</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#element-ui">element-ui</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
