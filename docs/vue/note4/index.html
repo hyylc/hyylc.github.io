@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="盘点 Vue3 与 Vue2 的区别 - 掘金 （建议收藏）Vue3 对比 Vue2.x 差异性、注意点、整体梳理，与React hook比又如何？（面试热点） - 掘金
+组合式API#组合式API是一系列API的集合，使我们能够使用函数的方式书写组件，包括：
+响应式API：ref() reactive()等 生命周期钩子：onMounted() onUnmounted()等 依赖注入：provide() inject() setup() 钩子是在组件中使用组合式 API 的入口。在 setup() 函数中返回的对象会暴露给模板和组件实例。其他的选项也可以通过组件实例来获取 setup() 暴露的属性。 组合式API的优势
+更好的逻辑复用（组合函数等），解决了选项式API中 mixin 的缺陷，如（当使用多个mixin时，数据来源不清晰；不同 mixin 可能会注册相同的属性名，造成命名冲突；多个 mixin 之间相互作用，会隐形地耦合在一起） 更灵活的代码组织，选项式API中关于同一个逻辑的代码分散在各个选项中，要来回滚动，十分不便 更好的类型推导，支持TS 更小的打包体积 生命周期钩子#setup替代了beforeCreate/ created beforeDestory/ destoryed 改名 beforeUnmount / unmounted beforeMount/ mounted / beforeUpdate / updated / beforeUnmount / unmounted 写在setup()里，并且加前缀on 多根节点#里面可以写多个根节点
+Suspense异步组件#允许程序在异步组件加载完之前渲染其他内容。 需要在 suspense 组件中，使用template模板声明，接收 #default 默认插槽和 #fallback 备用插槽。即List加载完成时显示自身（default），完成前显示Loading（fallback）。">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="Vue3和Vue2的区别" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://hyylc.github.io/docs/vue/note4/" />
+<title>Vue3和Vue2的区别 | Hyy小站</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.33a48f5432973b8ff9a82679d9e45d67f2c15d4399bd2829269455cfe390b5e8.css" integrity="sha256-M6SPVDKXO4/5qCZ52eRdZ/LBXUOZvSgpJpRVz&#43;OQteg=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.84141ec77450c442823cd9ba1ac6409a3d304dcb13f642def4303366106cc0f3.js" integrity="sha256-hBQex3RQxEKCPNm6GsZAmj0wTcsT9kLe9DAzZhBswPM=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="https://hyylc.github.io/docs/vue/note4/index.xml" title="Hyy小站" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Hyy小站</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/js/" class="">JS笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note2/" class="">手写函数</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note1/" class="">函数柯里化和Promise</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/js/note3/" class="">JS内置对象Array（一）</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/vue/" class="">Vue笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/vue/note3/" class="">Vue3.0 基础</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/vue/note4/" class="active">Vue3和Vue2的区别</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/vue/note1/" class="">Vue响应式原理</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/vue/note2/" class="">Vue组合式API</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BD%91%E7%BB%9C/" class="">网络笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BD%91%E7%BB%9C/note1/" class="">前端跨域问题</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BB%84%E4%BB%B6%E5%BA%93/" class="">组件库笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E7%BB%84%E4%BB%B6%E5%BA%93/note1/" class="">element-ui</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/hugo/" class="">Hugo笔记</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hugo/note1/" class="">hugo建站</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="">开发工具</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/note1/" class="">Vite &amp; Pinia</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/note2/" class="">其他工具</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Vue3和Vue2的区别</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#组合式api">组合式API</a></li>
+    <li><a href="#生命周期钩子">生命周期钩子</a></li>
+    <li><a href="#多根节点">多根节点</a></li>
+    <li><a href="#suspense异步组件">Suspense异步组件</a></li>
+    <li><a href="#teleport组件">Teleport组件</a></li>
+    <li><a href="#ts支持">TS支持</a></li>
+    <li><a href="#打包优化">打包优化</a></li>
+    <li><a href="#响应式原理">响应式原理</a></li>
+    <li><a href="#diff算法">Diff算法</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p><a href="https://juejin.cn/post/7067413380922867725#heading-0">盘点 Vue3 与 Vue2 的区别 - 掘金</a>
+<a href="https://juejin.cn/post/6892295955844956167#heading-10">（建议收藏）Vue3 对比 Vue2.x 差异性、注意点、整体梳理，与React hook比又如何？（面试热点） - 掘金</a></p>
+<h2 id="组合式api">
+  组合式API
+  <a class="anchor" href="#%e7%bb%84%e5%90%88%e5%bc%8fapi">#</a>
+</h2>
+<p>组合式API是一系列API的集合，使我们能够使用函数的方式书写组件，包括：</p>
+<ul>
+<li>响应式API：ref()  reactive()等</li>
+<li>生命周期钩子：onMounted()  onUnmounted()等</li>
+<li>依赖注入：provide()  inject()</li>
+</ul>
+<p>setup() 钩子是在组件中使用组合式 API 的入口。在 setup() 函数中返回的对象会暴露给模板和组件实例。其他的选项也可以通过组件实例来获取 setup() 暴露的属性。
+<strong>组合式API的优势</strong></p>
+<ol>
+<li>更好的逻辑复用（组合函数等），解决了选项式API中 mixin 的缺陷，如（当使用多个mixin时，数据来源不清晰；不同 mixin 可能会注册相同的属性名，造成命名冲突；多个 mixin 之间相互作用，会隐形地耦合在一起）</li>
+<li>更灵活的代码组织，选项式API中关于同一个逻辑的代码分散在各个选项中，要来回滚动，十分不便</li>
+<li>更好的类型推导，支持TS</li>
+<li>更小的打包体积</li>
+</ol>
+<h2 id="生命周期钩子">
+  生命周期钩子
+  <a class="anchor" href="#%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f%e9%92%a9%e5%ad%90">#</a>
+</h2>
+<ul>
+<li>setup替代了beforeCreate/ created</li>
+<li>beforeDestory/ destoryed 改名 beforeUnmount / unmounted</li>
+<li>beforeMount/ mounted / beforeUpdate / updated / beforeUnmount / unmounted 写在setup()里，并且加前缀on</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/webp/29755668/1690440597019-af7fdd06-9e8e-4aae-acaa-1e579c2b5413.webp#averageHue=%23d0f0ec&amp;clientId=u0b2f1c79-d195-4&amp;from=paste&amp;id=hBgur&amp;originHeight=375&amp;originWidth=730&amp;originalType=url&amp;ratio=1.5&amp;rotation=0&amp;showTitle=false&amp;status=done&amp;style=none&amp;taskId=u83325a72-9669-4f73-9500-f9afe14696a&amp;title=" alt="" /></p>
+<h2 id="多根节点">
+  多根节点
+  <a class="anchor" href="#%e5%a4%9a%e6%a0%b9%e8%8a%82%e7%82%b9">#</a>
+</h2>
+<p><!-- raw HTML omitted -->里面可以写多个根节点</p>
+<h2 id="suspense异步组件">
+  Suspense异步组件
+  <a class="anchor" href="#suspense%e5%bc%82%e6%ad%a5%e7%bb%84%e4%bb%b6">#</a>
+</h2>
+<p>允许程序在异步组件加载完之前渲染其他内容。
+需要在 suspense 组件中，使用template模板声明，接收 #default 默认插槽和 #fallback 备用插槽。即List加载完成时显示自身（default），完成前显示Loading（fallback）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">tempalte</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">suspense</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">template</span> <span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">default</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">List</span> /&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">template</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">template</span> <span style="color:#960050;background-color:#1e0010">#</span><span style="color:#a6e22e">fallback</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>        Loading...
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">template</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">suspense</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">template</span>&gt;
+</span></span></code></pre></div><h2 id="teleport组件">
+  Teleport组件
+  <a class="anchor" href="#teleport%e7%bb%84%e4%bb%b6">#</a>
+</h2>
+<p>可将部分 DOM 移动到 Vue app 之外的位置。接收 to 和 disabled，其中 to 必填，指明目标容器，disabled 设为 true 时内容将保留在原始位置而不是移动到目标容器。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">button</span> <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#a6e22e">click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dialogVisible = true&#34;</span>&gt;显示弹窗&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">teleport</span> <span style="color:#a6e22e">to</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;body&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dialog&#34;</span> <span style="color:#a6e22e">v-if</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dialogVisible&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    我是弹窗，我直接移动到了body标签下
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">teleport</span>&gt;
+</span></span></code></pre></div><h2 id="ts支持">
+  TS支持
+  <a class="anchor" href="#ts%e6%94%af%e6%8c%81">#</a>
+</h2>
+<p>类型检查，便于阅读和维护。</p>
+<h2 id="打包优化">
+  打包优化
+  <a class="anchor" href="#%e6%89%93%e5%8c%85%e4%bc%98%e5%8c%96">#</a>
+</h2>
+<p>借助模块的导入、导出，分析模块依赖关系，无需打包未使用的模块。</p>
+<h2 id="响应式原理">
+  响应式原理
+  <a class="anchor" href="#%e5%93%8d%e5%ba%94%e5%bc%8f%e5%8e%9f%e7%90%86">#</a>
+</h2>
+<p>使用proxy代替defineProperty。
+defineProperty：直接在一个对象上定义新的属性或修改现有的属性，并返回对象。无法监听对象或数组新增、删除的元素。Vue2 相应解决方案：针对常用数组原型方法push、pop、shift、unshift、splice、sort、reverse进行了hack处理；提供Vue.set监听对象/数组新增属性。对象的新增/删除响应，还可以new个新对象，新增则合并新属性和旧对象；删除则将删除属性后的对象深拷贝给新对象。
+proxy：创建对象的代理，从而实现基本操作的拦截和自定义操作。关注对象整体，不关心里面有什么属性。</p>
+<h2 id="diff算法">
+  Diff算法
+  <a class="anchor" href="#diff%e7%ae%97%e6%b3%95">#</a>
+</h2>
+<p>区分静态和动态节点，对静态节点进行提升，避免在每次渲染时重新创建。</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#组合式api">组合式API</a></li>
+    <li><a href="#生命周期钩子">生命周期钩子</a></li>
+    <li><a href="#多根节点">多根节点</a></li>
+    <li><a href="#suspense异步组件">Suspense异步组件</a></li>
+    <li><a href="#teleport组件">Teleport组件</a></li>
+    <li><a href="#ts支持">TS支持</a></li>
+    <li><a href="#打包优化">打包优化</a></li>
+    <li><a href="#响应式原理">响应式原理</a></li>
+    <li><a href="#diff算法">Diff算法</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
